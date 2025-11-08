@@ -1,4 +1,5 @@
 package pl.wsb.fitnesstracker.statistics.api;
+import pl.wsb.fitnesstracker.user.api.User;
 
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
@@ -19,6 +20,10 @@ public class Statistics {
     @Nullable
     private Long id;
 
+    @OneToOne()
+    @JoinColumn(name="user_id", referencedColumnName = "id")
+    private User user;
+
     @Column(name = "total_trainings", nullable = false)
     private int totalTrainings;
 
@@ -28,9 +33,10 @@ public class Statistics {
     @Column(name = "total_calories_burned")
     private int totalCaloriesBurned;
 
-    public Statistics(int totalTrainings, double totalDistance, int totalCaloriesBurned) {
+    public Statistics(User user, int totalTrainings, double totalDistance, int totalCaloriesBurned) {
         this.totalTrainings = totalTrainings;
         this.totalDistance = totalDistance;
         this.totalCaloriesBurned = totalCaloriesBurned;
+        this.user = user;
     }
 }
