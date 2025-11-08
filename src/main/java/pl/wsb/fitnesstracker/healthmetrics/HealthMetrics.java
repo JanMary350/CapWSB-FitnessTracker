@@ -8,12 +8,14 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import pl.wsb.fitnesstracker.user.api.User;
 
+import java.time.LocalDate;
+
 @Entity
 @Table(name="Health_Metrics")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
-public class healthMetrics {
+public class HealthMetrics {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +27,7 @@ public class healthMetrics {
     private User user;
 
     @Column(name = "date", nullable = false)
-    private String date;
+    private LocalDate date;
 
     @Column(name = "weight")
     private double weight;
@@ -36,7 +38,7 @@ public class healthMetrics {
     @Column(name = "heart_rate")
     private int heartRate;
 
-    public healthMetrics(User user, String date, double weight, double height, int heartRate) {
+    public HealthMetrics(User user, LocalDate date, double weight, double height, int heartRate) {
         this.date = date;
         this.weight = weight;
         this.height = height;
