@@ -1,9 +1,7 @@
 package pl.wsb.fitnesstracker.user.internal;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.wsb.fitnesstracker.user.api.UserDto;
 import pl.wsb.fitnesstracker.user.api.UserSimpleDto;
 
@@ -35,6 +33,16 @@ class UserController {
                 .stream()
                 .map(userMapper::toSimpleDto)
                 .toList();
+    }
+    @GetMapping("/{id}")
+    public UserDto getUser(@PathVariable Long id) {
+        return userMapper.toDto(userService.getUser(id).get());
+
+    }
+
+    @DeleteMapping ("/{id}")
+    public void deleteUserById(@PathVariable Long id) {
+        userService.deleteUser(id);
     }
 }
 
